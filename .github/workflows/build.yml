@@ -32,6 +32,19 @@ jobs:
       #Run Tests
       - name: Run Tests
         run: mvn -B test
+  codecov:
+    name: Codecov execution
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
+          files: ./coverage1.xml,./coverage2.xml # optional
+          flags: unittests # optional
+          name: codecov-umbrella # optional
+          fail_ci_if_error: true # optional (default = false)
+          verbose: true # optional (default = false)
   #Sonar's Job
   sonar:
     #Depends on test's job
